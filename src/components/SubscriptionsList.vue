@@ -33,26 +33,7 @@
             }"
             class="topics-color-line"
           ></div>
-          <el-popover
-            placement="top"
-            trigger="hover"
-            popper-class="topic-tooltip"
-            :content="getPopoverContent(copySuccess, sub)"
-          >
-            <a
-              slot="reference"
-              v-clipboard:copy="sub.topic"
-              v-clipboard:success="onCopySuccess"
-              href="javascript:;"
-              class="topic"
-              :style="{
-                color: sub.color,
-              }"
-              @click.stop="stopClick"
-            >
-              {{ sub.alias || sub.topic }}
-            </a>
-          </el-popover>
+           
           <span class="qos">QoS {{ sub.qos }}</span>
           <a href="javascript:;" class="close" @click.stop="unsubscribe(sub)">
             <i :class="unsubLoading ? 'el-icon-loading' : 'el-icon-close'"></i>
@@ -508,7 +489,7 @@ export default class SubscriptionsList extends Vue {
 
   private unsubscribe(row: SubscriptionModel, disable?: boolean): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (!this.client || !this.client.connected) {
+      if (!this.client) {
         this.$notify({
           title: this.$tc('connections.notConnect'),
           message: '',
@@ -628,7 +609,7 @@ export default class SubscriptionsList extends Vue {
 
   private handleTopicEdit() {
     this.showContextmenu = false
-    if (!this.client || !this.client.connected) {
+    if (!this.client) {
       this.$notify({
         title: this.$tc('connections.notConnect'),
         message: '',
@@ -668,7 +649,7 @@ export default class SubscriptionsList extends Vue {
 
   private async setTopicDisabled(disable: boolean) {
     this.showContextmenu = false
-    if (!this.client || !this.client.connected) {
+    if (!this.client) {
       this.$notify({
         title: this.$tc('connections.notConnect'),
         message: '',
