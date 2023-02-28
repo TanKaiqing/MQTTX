@@ -33,26 +33,7 @@
             }"
             class="topics-color-line"
           ></div>
-          <el-popover
-            placement="top"
-            trigger="hover"
-            popper-class="topic-tooltip"
-            :content="getPopoverContent(copySuccess, sub)"
-          >
-            <a
-              slot="reference"
-              v-clipboard:copy="sub.topic"
-              v-clipboard:success="onCopySuccess"
-              href="javascript:;"
-              class="topic"
-              :style="{
-                color: sub.color,
-              }"
-              @click.stop="stopClick"
-            >
-              {{ sub.alias || sub.topic }}
-            </a>
-          </el-popover>
+           
           <span class="qos">QoS {{ sub.qos }}</span>
           <a href="javascript:;" class="close" @click.stop="unsubscribe(sub)">
             <i :class="unsubLoading ? 'el-icon-loading' : 'el-icon-close'"></i>
